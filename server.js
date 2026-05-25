@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,8 +6,10 @@ const Resume = require('./models/Resume');
 
 const app = express();
 
+// View Engine
 app.set('view engine', 'ejs');
 
+// Middleware
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -37,13 +38,9 @@ app.post('/save', async (req, res) => {
         const newResume = new Resume({
 
             name: req.body.name,
-
             email: req.body.email,
-
             skills: req.body.skills,
-
             education: req.body.education,
-
             experience: req.body.experience
 
         });
@@ -62,8 +59,10 @@ app.post('/save', async (req, res) => {
 
 });
 
-const PORT = 3000;
+// PORT FOR RENDER
+const PORT = process.env.PORT || 3000;
 
+// Server Start
 app.listen(PORT, () => {
 
     console.log(`Server Running On Port ${PORT}`);
